@@ -18,8 +18,8 @@ type Player struct {
 }
 
 var players = []Player{
-	Player{ID: 123, Name: "Pablo", HighScore: 1100, IsOnline: true, Location: "Italy"},
-	Player{ID: 230, Name: "Dora", HighScore: 2100, IsOnline: false, Location: "Germany"},
+	{ID: 123, Name: "Pablo", HighScore: 1100, IsOnline: true, Location: "Italy"},
+	{ID: 230, Name: "Dora", HighScore: 2100, IsOnline: false, Location: "Germany"},
 }
 
 var playerObject = graphql.NewObject(
