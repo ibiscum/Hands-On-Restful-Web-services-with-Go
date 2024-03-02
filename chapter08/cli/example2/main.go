@@ -26,7 +26,7 @@ func main() {
 			// Fetch arguments in a array
 			args = c.Args()
 			personName := args[0]
-			marks := args[1:len(args)]
+			marks := args[1:]
 			log.Println("Person: ", personName)
 			log.Println("marks", marks)
 		}

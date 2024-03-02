@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -55,7 +55,7 @@ func (driver *DBClient) GetPackagesbyWeight(w http.ResponseWriter, r *http.Reque
 // PostPackage saves a package
 func (driver *DBClient) PostPackage(w http.ResponseWriter, r *http.Request) {
 	var Package = helper.Package{}
-	postBody, _ := ioutil.ReadAll(r.Body)
+	postBody, _ := io.ReadAll(r.Body)
 	Package.Data = string(postBody)
 	driver.db.Save(&Package)
 	responseMap := map[string]interface{}{"id": Package.ID}
@@ -70,9 +70,7 @@ func main() {
 		panic(err)
 	}
 	dbclient := &DBClient{db: db}
-	if err != nil {
-		panic(err)
-	}
+
 	defer db.Close()
 	// Create a new router
 	r := mux.NewRouter()

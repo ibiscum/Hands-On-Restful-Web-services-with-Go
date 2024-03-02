@@ -3,7 +3,6 @@ package main
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"os"
 
@@ -51,7 +50,7 @@ func createGist(url string, args []string) *grequests.Response {
 	// remaining arguments are file names with path
 	var fileContents = make(map[string]File)
 	for i := 1; i < len(args); i++ {
-		dat, err := ioutil.ReadFile(args[i])
+		dat, err := os.ReadFile(args[i])
 		if err != nil {
 			log.Println("Please check the filenames. Absolute path (or) same directory are allowed")
 			return nil

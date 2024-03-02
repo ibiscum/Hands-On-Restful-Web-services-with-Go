@@ -3,7 +3,7 @@ package main
 import (
 	"database/sql"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -49,9 +49,14 @@ func (driver *DBClient) GetOriginalURL(w http.ResponseWriter, r *http.Request) {
 func (driver *DBClient) GenerateShortURL(w http.ResponseWriter, r *http.Request) {
 	var id int
 	var record Record
-	postBody, _ := ioutil.ReadAll(r.Body)
+	postBody, _ := io.ReadAll(r.Body)
 	err := json.Unmarshal(postBody, &record)
+	if err != nil {
+		panic(err)
+	}
+
 	err = driver.db.QueryRow("INSERT INTO web_url(url) VALUES($1) RETURNING id", record.URL).Scan(&id)
+
 	responseMap := map[string]string{"encoded_string": base62.ToBase62(id)}
 
 	if err != nil {
@@ -71,9 +76,7 @@ func main() {
 		panic(err)
 	}
 	dbclient := &DBClient{db: db}
-	if err != nil {
-		panic(err)
-	}
+
 	defer db.Close()
 	// Create a new router
 	r := mux.NewRouter()
