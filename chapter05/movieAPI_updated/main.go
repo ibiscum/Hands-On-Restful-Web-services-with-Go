@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -53,13 +53,12 @@ func (db *DB) GetMovie(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 		w.Write(response)
 	}
-
 }
 
 // PostMovie adds a new movie to our MongoDB collection
 func (db *DB) PostMovie(w http.ResponseWriter, r *http.Request) {
 	var movie Movie
-	postBody, _ := ioutil.ReadAll(r.Body)
+	postBody, _ := io.ReadAll(r.Body)
 	json.Unmarshal(postBody, &movie)
 
 	result, err := db.collection.InsertOne(context.TODO(), movie)
@@ -78,7 +77,7 @@ func (db *DB) PostMovie(w http.ResponseWriter, r *http.Request) {
 func (db *DB) UpdateMovie(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	var movie Movie
-	putBody, _ := ioutil.ReadAll(r.Body)
+	putBody, _ := io.ReadAll(r.Body)
 	json.Unmarshal(putBody, &movie)
 
 	objectID, _ := primitive.ObjectIDFromHex(vars["id"])

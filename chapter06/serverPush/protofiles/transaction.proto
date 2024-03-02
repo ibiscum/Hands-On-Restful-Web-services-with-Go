@@ -1,5 +1,5 @@
 syntax = "proto3";
-package protofiles;
+option go_package = "./protofiles";
 
 message TransactionRequest {
    string from = 1;

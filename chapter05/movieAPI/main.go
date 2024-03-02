@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"time"
@@ -59,7 +59,7 @@ func (db *DB) GetMovie(w http.ResponseWriter, r *http.Request) {
 // PostMovie adds a new movie to our MongoDB collection
 func (db *DB) PostMovie(w http.ResponseWriter, r *http.Request) {
 	var movie Movie
-	postBody, _ := ioutil.ReadAll(r.Body)
+	postBody, _ := io.ReadAll(r.Body)
 	json.Unmarshal(postBody, &movie)
 
 	result, err := db.collection.InsertOne(context.TODO(), movie)

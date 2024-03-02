@@ -17,7 +17,10 @@ type Book struct {
 func dbOperations(db *sql.DB) {
 	// Create
 	statement, _ := db.Prepare("INSERT INTO books (name, author, isbn) VALUES (?, ?, ?)")
-	statement.Exec("A Tale of Two Cities", "Charles Dickens", 140430547)
+	_, err := statement.Exec("A Tale of Two Cities", "Charles Dickens", 140430547)
+	if err != nil {
+		panic(err)
+	}
 	log.Println("Inserted the book into database!")
 
 	// Read
@@ -27,6 +30,7 @@ func dbOperations(db *sql.DB) {
 		rows.Scan(&tempBook.id, &tempBook.name, &tempBook.author)
 		log.Printf("ID:%d, Book:%s, Author:%s\n", tempBook.id, tempBook.name, tempBook.author)
 	}
+
 	// Update
 	statement, _ = db.Prepare("update books set name=? where id=?")
 	statement.Exec("The Tale of Two Cities", 1)

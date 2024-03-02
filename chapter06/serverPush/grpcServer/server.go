@@ -17,7 +17,9 @@ const (
 )
 
 // server is used to create MoneyTransactionServer.
-type server struct{}
+type server struct {
+	pb.UnimplementedMoneyTransactionServer
+}
 
 // MakeTransaction implements MoneyTransactionServer.MakeTransaction
 func (s *server) MakeTransaction(in *pb.TransactionRequest, stream pb.MoneyTransaction_MakeTransactionServer) error {
