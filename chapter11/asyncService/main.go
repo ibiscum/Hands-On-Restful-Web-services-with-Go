@@ -5,8 +5,8 @@ import (
 	"log"
 	"time"
 
-	micro "github.com/go-micro/go-micro"
 	proto "github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter11/asyncService/proto"
+	micro "go-micro.dev/v4"
 )
 
 func main() {
@@ -14,7 +14,7 @@ func main() {
 	service := micro.NewService(
 		micro.Name("weather"),
 	)
-	p := micro.NewPublisher("alerts", service.Client())
+	p := micro.NewEvent("alerts", service.Client())
 
 	go func() {
 		for now := range time.Tick(15 * time.Second) {

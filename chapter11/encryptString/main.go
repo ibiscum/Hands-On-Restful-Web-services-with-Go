@@ -3,7 +3,7 @@ package main
 import (
 	"log"
 
-	"github.com/Hands-On-Restful-Web-services-with-Go/chapter11/encryptString/utils"
+	"github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter11/encryptString/utils"
 )
 
 // AES keys should be of length 16, 24, 32
