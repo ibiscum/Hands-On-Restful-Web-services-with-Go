@@ -122,6 +122,6 @@ require (
 	github.com/urfave/cli v1.22.14
 	go-micro.dev/v4 v4.10.2
 	go.mongodb.org/mongo-driver v1.14.0
-	google.golang.org/grpc v1.62.0
+	google.golang.org/grpc v1.62.1
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
