@@ -109,7 +109,7 @@ require (
 	github.com/gin-gonic/gin v1.9.1
 	github.com/go-redis/redis v6.15.9+incompatible
 	github.com/graphql-go/graphql v0.8.1
-	github.com/graphql-go/handler v0.2.3
+	github.com/graphql-go/handler v0.2.4
 	github.com/jinzhu/gorm v1.9.16
 	github.com/justinas/alice v1.2.0
 	github.com/levigross/grequests v0.0.0-20231203190023-9c307ef1f48d
