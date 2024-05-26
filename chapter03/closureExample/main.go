@@ -18,5 +18,4 @@ func generator() func() int {
 		i++
 		return i
 	}
-
 }
