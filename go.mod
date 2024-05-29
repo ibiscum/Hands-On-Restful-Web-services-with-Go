@@ -23,7 +23,6 @@ require (
 	github.com/Microsoft/go-winio v0.6.2 // indirect
 	github.com/ProtonMail/go-crypto v1.0.0 // indirect
 	github.com/bitly/go-simplejson v0.5.1 // indirect
-	github.com/bmizerany/assert v0.0.0-20160611221934-b7ed37b82869 // indirect
 	github.com/bytedance/sonic v1.11.8 // indirect
 	github.com/bytedance/sonic/loader v0.1.1 // indirect
 	github.com/cloudflare/circl v1.3.8 // indirect
@@ -71,6 +70,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/montanaflynn/stats v0.7.1 // indirect
 	github.com/nxadm/tail v1.4.11 // indirect
+	github.com/onsi/ginkgo v1.16.5 // indirect
 	github.com/oxtoacart/bpool v0.0.0-20190530202638-03653db5a59c // indirect
 	github.com/patrickmn/go-cache v2.1.0+incompatible // indirect
 	github.com/pelletier/go-toml/v2 v2.2.2 // indirect
@@ -127,7 +127,6 @@ require (
 	github.com/urfave/cli v1.22.15
 	go-micro.dev/v4 v4.10.2
 	go.mongodb.org/mongo-driver v1.15.0
-	google.golang.org/grpc v1.64.0
 	google.golang.org/grpc v1.64.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
