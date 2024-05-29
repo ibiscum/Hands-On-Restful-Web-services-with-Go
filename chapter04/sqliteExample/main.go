@@ -38,7 +38,10 @@ func dbOperations(db *sql.DB) {
 
 	//Delete
 	statement, _ = db.Prepare("delete from books where id=?")
-	statement.Exec(1)
+	_, err = statement.Exec(1)
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println("Successfully deleted the book in database!")
 }
 
@@ -54,6 +57,9 @@ func main() {
 	} else {
 		log.Println("Successfully created table books!")
 	}
-	statement.Exec()
+	_, err = statement.Exec()
+	if err != nil {
+		log.Fatal(err)
+	}
 	dbOperations(db)
 }

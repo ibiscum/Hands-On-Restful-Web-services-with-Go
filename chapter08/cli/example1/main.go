@@ -32,5 +32,8 @@ func main() {
 	}
 
 	// Pass os.Args to cli app to parse content
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

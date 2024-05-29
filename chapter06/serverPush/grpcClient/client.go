@@ -7,6 +7,7 @@ import (
 	pb "github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter06/serverPush/protofiles"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/credentials/insecure"
 )
 
 const (
@@ -36,7 +37,8 @@ func ReceiveStream(client pb.MoneyTransactionClient, request *pb.TransactionRequ
 
 func main() {
 	// Set up a connection to the server.
-	conn, err := grpc.Dial(address, grpc.WithInsecure())
+	conn, err := grpc.NewClient(address, grpc.WithTransportCredentials(insecure.NewCredentials()))
+
 	if err != nil {
 		log.Fatalf("Did not connect: %v", err)
 	}

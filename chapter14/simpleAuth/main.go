@@ -38,7 +38,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		session, _ := store.Get(r, "session.id")
 		if password == originalPassword {
 			session.Values["authenticated"] = true
-			session.Save(r, w)
+			err := session.Save(r, w)
+			if err != nil {
+				log.Fatal(err)
+			}
 		} else {
 			http.Error(w, "Invalid Credentials", http.StatusUnauthorized)
 			return
@@ -55,7 +58,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session.id")
 	session.Values["authenticated"] = false
-	session.Save(r, w)
+	err := session.Save(r, w)
+	if err != nil {
+		log.Fatal(err)
+	}
 	w.Write([]byte(""))
 }
 

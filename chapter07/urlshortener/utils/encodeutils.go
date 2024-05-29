@@ -1,7 +1,6 @@
 package base62
 
 import (
-	"math"
 	"strings"
 )
 
@@ -13,12 +12,12 @@ func ToBase62(num int) string {
 	r := num % b
 	res := string(base[r])
 	div := num / b
-	q := int(math.Floor(float64(div)))
+	q := int(float64(div))
 
 	for q != 0 {
 		r = q % b
 		temp := q / b
-		q = int(math.Floor(float64(temp)))
+		q = int(float64(temp))
 		res = string(base[int(r)]) + res
 	}
 
