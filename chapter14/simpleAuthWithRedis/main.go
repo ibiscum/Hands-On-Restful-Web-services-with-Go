@@ -10,14 +10,18 @@ import (
 	redistore "gopkg.in/boj/redistore.v1"
 )
 
-var store, err = redistore.NewRediStore(10, "tcp", ":6379", "", []byte(os.Getenv("SESSION_SECRET")))
+var store, _ = redistore.NewRediStore(10, "tcp", ":6379", "", []byte(os.Getenv("SESSION_SECRET")))
+
 var users = map[string]string{"naren": "passme", "admin": "password"}
 
 // HealthcheckHandler returns the date and time
 func HealthcheckHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session.id")
 	if (session.Values["authenticated"] != nil) && session.Values["authenticated"] != false {
-		w.Write([]byte(time.Now().String()))
+		_, err := w.Write([]byte(time.Now().String()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 	}
@@ -36,7 +40,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	if originalPassword, ok := users[username]; ok {
 		if password == originalPassword {
 			session.Values["authenticated"] = true
-			session.Save(r, w)
+			err := session.Save(r, w)
+			if err != nil {
+				log.Fatal(err)
+			}
 		} else {
 			http.Error(w, "Invalid Credentials", http.StatusUnauthorized)
 			return
@@ -45,7 +52,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "User is not found", http.StatusNotFound)
 		return
 	}
-	w.Write([]byte("Logged In successfully"))
+	_, err = w.Write([]byte("Logged In successfully"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
 
@@ -53,8 +63,14 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session.id")
 	session.Options.MaxAge = -1
-	session.Save(r, w)
-	w.Write([]byte(""))
+	err := session.Save(r, w)
+	if err != nil {
+		log.Fatal(err)
+	}
+	_, err = w.Write([]byte(""))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {

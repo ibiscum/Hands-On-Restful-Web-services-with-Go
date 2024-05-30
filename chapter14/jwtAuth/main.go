@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io"
 	"log"
 	"net/http"
 	"os"
@@ -24,11 +25,16 @@ type Response struct {
 
 // HealthcheckHandler returns the date and time
 func HealthcheckHandler(w http.ResponseWriter, r *http.Request) {
-	tokenString, err := request.HeaderExtractor{"access_token"}.ExtractToken(r)
-	token, err := jwt.Parse(tokenString, func(token *jwt.Token) (interface{}, error) {
+	buf, err := io.ReadAll(r.Body)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// tokenString, err := request.HeaderExtractor{"access_token"}.ExtractToken(r)
+	token, err := jwt.Parse(string(buf), func(token *jwt.Token) (interface{}, error) {
 		// Don't forget to validate the alg is what you expect:
 		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
-			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
 		}
 
 		// hmacSampleSecret is a []byte containing your secret, e.g. []byte("my_secret_key")
@@ -36,7 +42,10 @@ func HealthcheckHandler(w http.ResponseWriter, r *http.Request) {
 	})
 	if err != nil {
 		w.WriteHeader(http.StatusForbidden)
-		w.Write([]byte("Access Denied; Please check the access token"))
+		_, err := w.Write([]byte("Access Denied; Please check the access token"))
+		if err != nil {
+			log.Fatal(err)
+		}
 		return
 	}
 	if claims, ok := token.Claims.(jwt.MapClaims); ok && token.Valid {
@@ -46,10 +55,16 @@ func HealthcheckHandler(w http.ResponseWriter, r *http.Request) {
 		response["time"] = time.Now().String()
 		response["user"] = claims["username"].(string)
 		responseJSON, _ := json.Marshal(response)
-		w.Write(responseJSON)
+		_, err := w.Write(responseJSON)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusForbidden)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -74,13 +89,19 @@ func getTokenHandler(w http.ResponseWriter, r *http.Request) {
 			tokenString, err := token.SignedString(secretKey)
 			if err != nil {
 				w.WriteHeader(http.StatusBadGateway)
-				w.Write([]byte(err.Error()))
+				_, err := w.Write([]byte(err.Error()))
+				if err != nil {
+					log.Fatal(err)
+				}
 			}
 			response := Response{Token: tokenString, Status: "success"}
 			responseJSON, _ := json.Marshal(response)
 			w.WriteHeader(http.StatusOK)
 			w.Header().Set("Content-Type", "application/json")
-			w.Write(responseJSON)
+			_, err = w.Write(responseJSON)
+			if err != nil {
+				log.Fatal(err)
+			}
 
 		} else {
 			http.Error(w, "Invalid Credentials", http.StatusUnauthorized)

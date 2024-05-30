@@ -17,7 +17,10 @@ var users = map[string]string{"naren": "passme", "admin": "password"}
 func HealthcheckHandler(w http.ResponseWriter, r *http.Request) {
 	session, _ := store.Get(r, "session.id")
 	if (session.Values["authenticated"] != nil) && session.Values["authenticated"] != false {
-		w.Write([]byte(time.Now().String()))
+		_, err := w.Write([]byte(time.Now().String()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		http.Error(w, "Forbidden", http.StatusForbidden)
 	}
@@ -50,7 +53,10 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "User is not found", http.StatusNotFound)
 		return
 	}
-	w.Write([]byte("Logged In successfully"))
+	_, err = w.Write([]byte("Logged In successfully"))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
 
@@ -62,7 +68,10 @@ func LogoutHandler(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	w.Write([]byte(""))
+	_, err = w.Write([]byte(""))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
