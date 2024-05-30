@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"net/http"
 
 	"github.com/graphql-go/graphql"
@@ -70,5 +71,8 @@ func main() {
 	})
 
 	http.Handle("/graphql", h)
-	http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
