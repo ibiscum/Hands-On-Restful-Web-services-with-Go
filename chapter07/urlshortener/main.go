@@ -35,13 +35,19 @@ func (driver *DBClient) GetOriginalURL(w http.ResponseWriter, r *http.Request) {
 	// Handle response details
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 		responseMap := map[string]interface{}{"url": url}
 		response, _ := json.Marshal(responseMap)
-		w.Write(response)
+		_, err := w.Write(response)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -61,12 +67,18 @@ func (driver *DBClient) GenerateShortURL(w http.ResponseWriter, r *http.Request)
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
 		response, _ := json.Marshal(responseMap)
-		w.Write(response)
+		_, err := w.Write(response)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 

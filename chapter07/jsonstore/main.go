@@ -31,12 +31,18 @@ func (driver *DBClient) GetPackage(w http.ResponseWriter, r *http.Request) {
 	driver.db.First(&Package, vars["id"])
 	var PackageData interface{}
 	// Unmarshal JSON string to interface
-	json.Unmarshal([]byte(Package.Data), &PackageData)
+	err := json.Unmarshal([]byte(Package.Data), &PackageData)
+	if err != nil {
+		log.Fatal(err)
+	}
 	var response = PackageResponse{Package: Package}
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	respJSON, _ := json.Marshal(response)
-	w.Write(respJSON)
+	_, err = w.Write(respJSON)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // GetPackagesbyWeight fetches all packages with given weight
@@ -49,7 +55,10 @@ func (driver *DBClient) GetPackagesbyWeight(w http.ResponseWriter, r *http.Reque
 	w.WriteHeader(http.StatusOK)
 	w.Header().Set("Content-Type", "application/json")
 	respJSON, _ := json.Marshal(packages)
-	w.Write(respJSON)
+	_, err := w.Write(respJSON)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 // PostPackage saves a package
@@ -61,7 +70,10 @@ func (driver *DBClient) PostPackage(w http.ResponseWriter, r *http.Request) {
 	responseMap := map[string]interface{}{"id": Package.ID}
 	w.Header().Set("Content-Type", "application/json")
 	response, _ := json.Marshal(responseMap)
-	w.Write(response)
+	_, err := w.Write(response)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
