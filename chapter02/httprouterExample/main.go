@@ -17,12 +17,14 @@ func getCommandOutput(command string, arguments ...string) string {
 
 func goVersion(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
 	response := getCommandOutput("/usr/local/go/bin/go", "version")
-	io.WriteString(w, response)
-	return
+	_, err := io.WriteString(w, response)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func getFileContent(w http.ResponseWriter, r *http.Request, params httprouter.Params) {
-	fmt.Fprintf(w, getCommandOutput("/bin/cat", params.ByName("name")))
+	fmt.Fprint(w, getCommandOutput("/bin/cat", params.ByName("name")))
 }
 
 func main() {

@@ -10,7 +10,10 @@ import (
 // HealthCheck API returns date time to client
 func HealthCheck(w http.ResponseWriter, req *http.Request) {
 	currentTime := time.Now()
-	io.WriteString(w, currentTime.String())
+	_, err := io.WriteString(w, currentTime.String())
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {

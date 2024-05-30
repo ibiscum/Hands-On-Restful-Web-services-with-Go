@@ -3,6 +3,7 @@ package main
 import (
 	"crypto/rand"
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -12,13 +13,13 @@ type UUID struct {
 
 func (p *UUID) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.URL.Path == "/" {
-		giveRandomUUID(w, r)
+		giveRandomUUID(w)
 		return
 	}
 	http.NotFound(w, r)
 }
 
-func giveRandomUUID(w http.ResponseWriter, r *http.Request) {
+func giveRandomUUID(w http.ResponseWriter) {
 	c := 10
 	b := make([]byte, c)
 	_, err := rand.Read(b)
@@ -32,5 +33,8 @@ func giveRandomUUID(w http.ResponseWriter, r *http.Request) {
 
 func main() {
 	mux := &UUID{}
-	http.ListenAndServe(":8000", mux)
+	err := http.ListenAndServe(":8000", mux)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

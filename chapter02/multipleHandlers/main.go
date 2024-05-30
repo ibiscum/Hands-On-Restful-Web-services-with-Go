@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"math/rand"
 	"net/http"
 )
@@ -16,5 +17,8 @@ func main() {
 	newMux.HandleFunc("/randomInt", func(w http.ResponseWriter, r *http.Request) {
 		fmt.Fprintln(w, rand.Intn(100))
 	})
-	http.ListenAndServe(":8000", newMux)
+	err := http.ListenAndServe(":8000", newMux)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
