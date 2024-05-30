@@ -27,13 +27,19 @@ func dbOperations(db *sql.DB) {
 	rows, _ := db.Query("SELECT id, name, author FROM books")
 	var tempBook Book
 	for rows.Next() {
-		rows.Scan(&tempBook.id, &tempBook.name, &tempBook.author)
+		err := rows.Scan(&tempBook.id, &tempBook.name, &tempBook.author)
+		if err != nil {
+			log.Fatal(err)
+		}
 		log.Printf("ID:%d, Book:%s, Author:%s\n", tempBook.id, tempBook.name, tempBook.author)
 	}
 
 	// Update
 	statement, _ = db.Prepare("update books set name=? where id=?")
-	statement.Exec("The Tale of Two Cities", 1)
+	_, err = statement.Exec("The Tale of Two Cities", 1)
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println("Successfully updated the book in database!")
 
 	//Delete

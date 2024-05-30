@@ -1,8 +1,8 @@
 package main
 
 import (
-	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"time"
 
@@ -16,10 +16,16 @@ func main() {
 	webservice.Route(webservice.GET("/ping").To(pingTime))
 	// Add the service to application
 	restful.Add(webservice)
-	http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func pingTime(req *restful.Request, resp *restful.Response) {
 	// Write to the response
-	io.WriteString(resp, fmt.Sprintf("%s", time.Now()))
+	_, err := io.WriteString(resp, time.Now().String())
+	if err != nil {
+		log.Fatal(err)
+	}
 }

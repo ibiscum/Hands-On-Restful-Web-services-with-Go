@@ -1,6 +1,7 @@
 package main
 
 import (
+	"log"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -18,5 +19,8 @@ func main() {
 		})
 	})
 
-	r.Run(":8000") // Listen and serve on 0.0.0.0:8080
+	err := r.Run(":8000") // Listen and serve on 0.0.0.0:8000
+	if err != nil {
+		log.Fatal(err)
+	}
 }

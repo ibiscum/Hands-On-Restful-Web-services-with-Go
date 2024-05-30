@@ -57,9 +57,15 @@ func (t TrainResource) getTrain(request *restful.Request, response *restful.Resp
 	if err != nil {
 		log.Println(err)
 		response.AddHeader("Content-Type", "text/plain")
-		response.WriteErrorString(http.StatusNotFound, "Train could not be found.")
+		err := response.WriteErrorString(http.StatusNotFound, "Train could not be found.")
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
-		response.WriteEntity(t)
+		err := response.WriteEntity(t)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -69,6 +75,9 @@ func (t TrainResource) createTrain(request *restful.Request, response *restful.R
 	decoder := json.NewDecoder(request.Request.Body)
 	var b TrainResource
 	err := decoder.Decode(&b)
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println(b.DriverName, b.OperatingStatus)
 
 	// Error handling is obvious here. So omitting...
@@ -77,10 +86,16 @@ func (t TrainResource) createTrain(request *restful.Request, response *restful.R
 	if err == nil {
 		newID, _ := result.LastInsertId()
 		b.ID = int(newID)
-		response.WriteHeaderAndEntity(http.StatusCreated, b)
+		err := response.WriteHeaderAndEntity(http.StatusCreated, b)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		response.AddHeader("Content-Type", "text/plain")
-		response.WriteErrorString(http.StatusInternalServerError, err.Error())
+		err := response.WriteErrorString(http.StatusInternalServerError, err.Error())
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -93,7 +108,10 @@ func (t TrainResource) removeTrain(request *restful.Request, response *restful.R
 		response.WriteHeader(http.StatusOK)
 	} else {
 		response.AddHeader("Content-Type", "text/plain")
-		response.WriteErrorString(http.StatusInternalServerError, err.Error())
+		err := response.WriteErrorString(http.StatusInternalServerError, err.Error())
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 

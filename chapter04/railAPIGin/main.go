@@ -88,5 +88,8 @@ func main() {
 	r.POST("/v1/stations", CreateStation)
 	r.DELETE("/v1/stations/:station_id", RemoveStation)
 
-	r.Run(":8000") // Default listen and serve on 0.0.0.0:8080
+	err = r.Run(":8000") // Default listen and serve on 0.0.0.0:8000
+	if err != nil {
+		log.Fatal(err)
+	}
 }
