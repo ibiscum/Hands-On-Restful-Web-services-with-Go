@@ -46,12 +46,18 @@ func (db *DB) GetMovie(w http.ResponseWriter, r *http.Request) {
 
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.Header().Set("Content-Type", "application/json")
 		response, _ := json.Marshal(movie)
 		w.WriteHeader(http.StatusOK)
-		w.Write(response)
+		_, err := w.Write(response)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 }
@@ -60,17 +66,26 @@ func (db *DB) GetMovie(w http.ResponseWriter, r *http.Request) {
 func (db *DB) PostMovie(w http.ResponseWriter, r *http.Request) {
 	var movie Movie
 	postBody, _ := io.ReadAll(r.Body)
-	json.Unmarshal(postBody, &movie)
+	err := json.Unmarshal(postBody, &movie)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	result, err := db.collection.InsertOne(context.TODO(), movie)
 	if err != nil {
 		w.WriteHeader(http.StatusInternalServerError)
-		w.Write([]byte(err.Error()))
+		_, err := w.Write([]byte(err.Error()))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.Header().Set("Content-Type", "application/json")
 		response, _ := json.Marshal(result)
 		w.WriteHeader(http.StatusOK)
-		w.Write(response)
+		_, err := w.Write(response)
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -80,7 +95,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	defer client.Disconnect(context.TODO())
+	defer func() {
+		err := client.Disconnect(context.TODO())
+		if err != nil {
+			log.Fatal(err)
+		}
+	}()
 
 	collection := client.Database("appDB").Collection("movies")
 	db := &DB{collection: collection}
