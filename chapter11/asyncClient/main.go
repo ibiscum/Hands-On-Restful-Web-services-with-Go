@@ -19,7 +19,10 @@ func main() {
 	service := micro.NewService(micro.Name("weather_client"))
 	// Initialise the client and parse command line flags
 	service.Init()
-	micro.RegisterSubscriber("alerts", service.Server(), ProcessEvent)
+	err := micro.RegisterSubscriber("alerts", service.Server(), ProcessEvent)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	if err := service.Run(); err != nil {
 		log.Fatal(err)

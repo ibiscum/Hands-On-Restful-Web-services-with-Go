@@ -19,11 +19,14 @@ func main() {
 	go func() {
 		for now := range time.Tick(15 * time.Second) {
 			log.Println("Publishing weather alert to Topic: alerts")
-			p.Publish(context.TODO(), &proto.Event{
+			err := p.Publish(context.TODO(), &proto.Event{
 				City:        "Munich",
 				Timestamp:   now.UTC().Unix(),
 				Temperature: 2,
 			})
+			if err != nil {
+				log.Fatal(err)
+			}
 		}
 	}()
 	// Init will parse the command line flags.

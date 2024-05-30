@@ -2,6 +2,7 @@ package main
 
 import (
 	fmt "fmt"
+	"log"
 
 	proto "github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter11/encryptService/proto"
 	micro "go-micro.dev/v4"
@@ -17,7 +18,10 @@ func main() {
 	service.Init()
 
 	// Register handler
-	proto.RegisterEncrypterHandler(service.Server(), new(Encrypter))
+	err := proto.RegisterEncrypterHandler(service.Server(), new(Encrypter))
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	// Run the server
 	if err := service.Run(); err != nil {
