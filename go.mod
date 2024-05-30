@@ -1,6 +1,6 @@
 module github.com/ibiscum/Hands-On-Restful-Web-services-with-Go
 
-go 1.20
+go 1.22.1
 
 require (
 	github.com/golang/protobuf v1.5.4
@@ -49,7 +49,7 @@ require (
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/gorilla/securecookie v1.1.2 // indirect
-	github.com/imdario/mergo v0.3.12 // indirect
+	github.com/imdario/mergo v0.3.16 // indirect
 	github.com/inconshreveable/log15 v2.16.0+incompatible // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
