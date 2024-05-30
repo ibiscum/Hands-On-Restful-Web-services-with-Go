@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"net/http"
 )
 
@@ -15,14 +16,20 @@ func middleware(handler http.Handler) http.Handler {
 }
 
 func mainLogic(w http.ResponseWriter, r *http.Request) {
-	// Business logic goes here 
+	// Business logic goes here
 	fmt.Println("Executing mainHandler...")
-	w.Write([]byte("OK"))
+	_, err := w.Write([]byte("OK"))
+	if err != nil {
+		log.Fatal(err)
+	}
 }
 
 func main() {
 	// HandlerFunc returns a HTTP Handler
 	mainLogicHandler := http.HandlerFunc(mainLogic)
 	http.Handle("/", middleware(mainLogicHandler))
-	http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

@@ -22,7 +22,10 @@ func filterContentType(handler http.Handler) http.Handler {
 		// Filtering requests by MIME type
 		if r.Header.Get("Content-type") != "application/json" {
 			w.WriteHeader(http.StatusUnsupportedMediaType)
-			w.Write([]byte("415 - Unsupported Media Type. Please send JSON"))
+			_, err := w.Write([]byte("415 - Unsupported Media Type. Please send JSON"))
+			if err != nil {
+				log.Fatal(err)
+			}
 			return
 		}
 		handler.ServeHTTP(w, r)
@@ -54,11 +57,17 @@ func handle(w http.ResponseWriter, r *http.Request) {
 		log.Printf("Got %s city with area of %d sq miles!\n", tempCity.Name, tempCity.Area)
 		// Tell everything is fine
 		w.WriteHeader(http.StatusOK)
-		w.Write([]byte("201 - Created"))
+		_, err = w.Write([]byte("201 - Created"))
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		// Say method not allowed
 		w.WriteHeader(http.StatusMethodNotAllowed)
-		w.Write([]byte("405 - Method Not Allowed"))
+		_, err := w.Write([]byte("405 - Method Not Allowed"))
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 }
 
@@ -66,5 +75,8 @@ func main() {
 	originalHandler := http.HandlerFunc(handle)
 	chain := alice.New(filterContentType, setServerTimeCookie).Then(originalHandler)
 	http.Handle("/city", chain)
-	http.ListenAndServe(":8000", nil)
+	err := http.ListenAndServe(":8000", nil)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

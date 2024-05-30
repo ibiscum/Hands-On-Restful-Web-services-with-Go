@@ -2,7 +2,6 @@ package main
 
 import (
 	jsonparse "encoding/json"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
@@ -33,7 +32,7 @@ func (t *JSONServer) GiveBookDetail(r *http.Request, args *Args, reply *Book) er
 	var books []Book
 	// Read JSON file and load data
 	absPath, _ := filepath.Abs("chapter3/books.json")
-	raw, readerr := ioutil.ReadFile(absPath)
+	raw, readerr := os.ReadFile(absPath)
 	if readerr != nil {
 		log.Println("error:", readerr)
 		os.Exit(1)
@@ -61,9 +60,15 @@ func main() {
 	// Register the type of data requested as JSON
 	s.RegisterCodec(json.NewCodec(), "application/json")
 	// Register the service by creating a new JSON server
-	s.RegisterService(new(JSONServer), "")
+	err := s.RegisterService(new(JSONServer), "")
+	if err != nil {
+		log.Fatal(err)
+	}
 	r := mux.NewRouter()
 	r.Handle("/rpc", s)
-	http.ListenAndServe(":1234", r)
+	err = http.ListenAndServe(":8000", r)
+	if err != nil {
+		log.Fatal(err)
+	}
 
 }
