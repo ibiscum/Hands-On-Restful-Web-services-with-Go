@@ -87,7 +87,10 @@ func main() {
 					user := c.Args()[0]
 					var repoUrl = fmt.Sprintf("https://api.github.com/users/%s/repos", user)
 					resp := getStats(repoUrl)
-					resp.JSON(&repos)
+					err := resp.JSON(&repos)
+					if err != nil {
+						log.Fatal(err)
+					}
 					log.Println(repos)
 				} else {
 					log.Println("Please give a username. See -h to see help")
@@ -115,5 +118,8 @@ func main() {
 	}
 
 	app.Version = "1.0"
-	app.Run(os.Args)
+	err := app.Run(os.Args)
+	if err != nil {
+		log.Fatal(err)
+	}
 }

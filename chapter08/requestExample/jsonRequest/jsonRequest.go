@@ -13,7 +13,10 @@ func main() {
 		log.Fatalln("Unable to make request: ", err)
 	}
 	var returnData map[string]interface{}
-	resp.JSON(&returnData)
+	err = resp.JSON(&returnData)
+	if err != nil {
+		log.Fatal(err)
+	}
 	log.Println(returnData)
 
 }
