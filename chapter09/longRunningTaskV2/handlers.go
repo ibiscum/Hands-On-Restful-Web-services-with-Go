@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"log"
 	"net/http"
 	"strconv"
 	"time"
@@ -22,6 +23,9 @@ type JobServer struct {
 
 func (s *JobServer) asyncDBHandler(w http.ResponseWriter, r *http.Request) {
 	jobID, err := uuid.NewRandom()
+	if err != nil {
+		log.Fatal(err)
+	}
 	queryParams := r.URL.Query()
 
 	// Ex: client_time: 1569174071
@@ -38,7 +42,10 @@ func (s *JobServer) asyncDBHandler(w http.ResponseWriter, r *http.Request) {
 	if s.publish(jsonBody) == nil {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(jsonBody)
+		_, err := w.Write(jsonBody)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
@@ -46,6 +53,9 @@ func (s *JobServer) asyncDBHandler(w http.ResponseWriter, r *http.Request) {
 
 func (s *JobServer) asyncCallbackHandler(w http.ResponseWriter, r *http.Request) {
 	jobID, err := uuid.NewRandom()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	jsonBody, err := json.Marshal(models.Job{ID: jobID,
 		Type:      "B",
@@ -56,7 +66,10 @@ func (s *JobServer) asyncCallbackHandler(w http.ResponseWriter, r *http.Request)
 	if s.publish(jsonBody) == nil {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(jsonBody)
+		_, err := w.Write(jsonBody)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
@@ -64,6 +77,9 @@ func (s *JobServer) asyncCallbackHandler(w http.ResponseWriter, r *http.Request)
 
 func (s *JobServer) asyncMailHandler(w http.ResponseWriter, r *http.Request) {
 	jobID, err := uuid.NewRandom()
+	if err != nil {
+		log.Fatal(err)
+	}
 
 	jsonBody, err := json.Marshal(models.Job{ID: jobID,
 		Type:      "C",
@@ -76,7 +92,10 @@ func (s *JobServer) asyncMailHandler(w http.ResponseWriter, r *http.Request) {
 	if err == nil {
 		w.WriteHeader(http.StatusOK)
 		w.Header().Set("Content-Type", "application/json")
-		w.Write(jsonBody)
+		_, err := w.Write(jsonBody)
+		if err != nil {
+			log.Fatal(err)
+		}
 	} else {
 		w.WriteHeader(http.StatusInternalServerError)
 	}
@@ -108,5 +127,8 @@ func (s *JobServer) statusHandler(w http.ResponseWriter, r *http.Request) {
 	status := map[string]string{"ID": uuid, "Status": jobStatus.Val()}
 	response, err := json.Marshal(status)
 	handleError(err, "Cannot create response for client")
-	w.Write(response)
+	_, err = w.Write(response)
+	if err != nil {
+		log.Fatal(err)
+	}
 }
