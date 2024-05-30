@@ -1,6 +1,6 @@
 module github.com/ibiscum/Hands-On-Restful-Web-services-with-Go
 
-go 1.22
+go 1.20
 
 require (
 	github.com/golang/protobuf v1.5.4
