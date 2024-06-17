@@ -120,7 +120,7 @@ require (
 	github.com/machinebox/graphql v0.2.2
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/revel/revel v1.1.0
-	github.com/spf13/cobra v1.8.0
+	github.com/spf13/cobra v1.8.1
 	github.com/streadway/amqp v1.1.0
 	github.com/urfave/cli v1.22.15
 	go-micro.dev/v4 v4.10.2
