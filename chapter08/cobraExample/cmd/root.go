@@ -15,7 +15,7 @@ var rootCmd = &cobra.Command{
 	Run: func(cmd *cobra.Command, args []string) {
 		name := cmd.PersistentFlags().Lookup("name").Value
 		age := cmd.PersistentFlags().Lookup("age").Value
-		log.Printf("Hello %s (%s years), Welcome to the command line world", name, age)
+		log.Printf("Hello %s (%s years), welcome to the command line world", name, age)
 	},
 }
 
