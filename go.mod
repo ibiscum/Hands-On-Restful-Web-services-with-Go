@@ -1,6 +1,7 @@
 module github.com/ibiscum/Hands-On-Restful-Web-services-with-Go
 
 go 1.22.1
+toolchain go1.23.1
 
 require (
 	github.com/golang/protobuf v1.5.4
@@ -8,7 +9,7 @@ require (
 	github.com/gorilla/handlers v1.5.2
 	github.com/gorilla/mux v1.8.1
 	github.com/gorilla/rpc v1.2.1
-	github.com/gorilla/sessions v1.3.0
+	github.com/gorilla/sessions v1.4.0
 	github.com/julienschmidt/httprouter v1.3.0
 	golang.org/x/net v0.29.0
 	google.golang.org/protobuf v1.34.2
