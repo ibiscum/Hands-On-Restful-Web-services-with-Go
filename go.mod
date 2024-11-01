@@ -26,7 +26,7 @@ require (
 	github.com/cloudflare/circl v1.3.9 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.4 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.5 // indirect
 	github.com/cyphar/filepath-securejoin v0.3.0 // indirect
 	github.com/emirpasic/gods v1.18.1 // indirect
 	github.com/evanphx/json-patch/v5 v5.9.0 // indirect
@@ -123,7 +123,7 @@ require (
 	github.com/revel/revel v1.1.0
 	github.com/spf13/cobra v1.8.1
 	github.com/streadway/amqp v1.1.0
-	github.com/urfave/cli v1.22.15
+	github.com/urfave/cli v1.22.16
 	go-micro.dev/v4 v4.11.0
 	go.mongodb.org/mongo-driver v1.17.0
 	google.golang.org/grpc v1.67.0
