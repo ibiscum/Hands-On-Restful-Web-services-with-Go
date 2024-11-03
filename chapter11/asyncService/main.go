@@ -6,7 +6,7 @@ import (
 	"time"
 
 	proto "github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter11/asyncService/proto"
-	micro "go-micro.dev/v4"
+	micro "go-micro.dev/v5"
 )
 
 func main() {

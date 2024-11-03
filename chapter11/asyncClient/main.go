@@ -5,7 +5,7 @@ import (
 	"log"
 
 	proto "github.com/ibiscum/Hands-On-Restful-Web-services-with-Go/chapter11/asyncClient/proto"
-	micro "go-micro.dev/v4"
+	micro "go-micro.dev/v5"
 )
 
 // ProcessEvent processes a weather alert
