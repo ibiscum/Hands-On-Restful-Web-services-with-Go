@@ -11,6 +11,7 @@ import (
 
 import (
 	context "context"
+	// api "go-micro.dev/v5/api"
 	client "go-micro.dev/v5/client"
 	server "go-micro.dev/v5/server"
 )
@@ -21,9 +22,16 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 // Reference imports to suppress errors if they are not otherwise used.
+//var _ api.Endpoint
 var _ context.Context
 var _ client.Option
 var _ server.Option
+
+// Api Endpoints for Encrypter service
+
+// func NewEncrypterEndpoints() []*api.Endpoint {
+// 	return []*api.Endpoint{}
+// }
 
 // Client API for Encrypter service
 
