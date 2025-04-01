@@ -1,7 +1,6 @@
 module github.com/ibiscum/Hands-On-Restful-Web-services-with-Go
 
 go 1.23.2
-
 require (
 	github.com/golang/protobuf v1.5.4
 	github.com/google/uuid v1.6.0
@@ -10,8 +9,8 @@ require (
 	github.com/gorilla/rpc v1.2.1
 	github.com/gorilla/sessions v1.4.0
 	github.com/julienschmidt/httprouter v1.3.0
-	golang.org/x/net v0.30.0
-	google.golang.org/protobuf v1.35.1
+	golang.org/x/net v0.34.0
+	google.golang.org/protobuf v1.36.4
 	gopkg.in/boj/redistore.v1 v1.0.0-20160128113310-fc113767cd6b
 )
 
@@ -75,13 +74,13 @@ require (
 	github.com/xrash/smetrics v0.0.0-20240521201337-686a1a2994c1 // indirect
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	golang.org/x/arch v0.11.0 // indirect
-	golang.org/x/crypto v0.28.0 // indirect
+	golang.org/x/crypto v0.32.0 // indirect
 	golang.org/x/mod v0.21.0 // indirect
-	golang.org/x/sync v0.8.0 // indirect
-	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/text v0.19.0 // indirect
+	golang.org/x/sync v0.10.0 // indirect
+	golang.org/x/sys v0.29.0 // indirect
+	golang.org/x/text v0.21.0 // indirect
 	golang.org/x/tools v0.26.0 // indirect
-	google.golang.org/genproto/googleapis/rpc v0.0.0-20241021214115-324edc3d5d38 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20250115164207-1a7da9e5054f // indirect
 	gopkg.in/natefinch/lumberjack.v2 v2.2.1 // indirect
 	gopkg.in/stack.v0 v0.0.0-20141108040640-9b43fcefddd0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
@@ -107,6 +106,6 @@ require (
 	github.com/urfave/cli v1.22.16
 	go-micro.dev/v5 v5.3.0
 	go.mongodb.org/mongo-driver v1.17.1
-	google.golang.org/grpc v1.67.1
+	google.golang.org/grpc v1.71.0
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
