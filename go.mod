@@ -1,7 +1,6 @@
 module github.com/ibiscum/Hands-On-Restful-Web-services-with-Go
 
 go 1.23.2
-
 require (
 	github.com/golang/protobuf v1.5.4
 	github.com/google/uuid v1.6.0
@@ -11,7 +10,7 @@ require (
 	github.com/gorilla/sessions v1.4.0
 	github.com/julienschmidt/httprouter v1.3.0
 	golang.org/x/net v0.30.0
-	google.golang.org/protobuf v1.35.1
+	google.golang.org/protobuf v1.36.6
 	gopkg.in/boj/redistore.v1 v1.0.0-20160128113310-fc113767cd6b
 )
 
