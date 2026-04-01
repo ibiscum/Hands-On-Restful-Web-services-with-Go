@@ -108,7 +108,7 @@ require (
 	github.com/streadway/amqp v1.1.0
 	github.com/urfave/cli v1.22.16
 	go-micro.dev/v5 v5.3.0
-	go.mongodb.org/mongo-driver v1.17.3
+	go.mongodb.org/mongo-driver v1.17.9
 	google.golang.org/grpc v1.79.3
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
 )
