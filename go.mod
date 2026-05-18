@@ -23,7 +23,7 @@ require (
 	github.com/bytedance/sonic/loader v0.2.1 // indirect
 	github.com/cloudwego/base64x v0.1.4 // indirect
 	github.com/cloudwego/iasm v0.2.0 // indirect
-	github.com/cpuguy83/go-md2man/v2 v2.0.6 // indirect
+	github.com/cpuguy83/go-md2man/v2 v2.0.7 // indirect
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
 	github.com/fsnotify/fsnotify v1.8.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.6 // indirect
@@ -106,7 +106,7 @@ require (
 	github.com/revel/revel v1.1.0
 	github.com/spf13/cobra v1.9.1
 	github.com/streadway/amqp v1.1.0
-	github.com/urfave/cli v1.22.16
+	github.com/urfave/cli v1.22.17
 	go-micro.dev/v5 v5.3.0
 	go.mongodb.org/mongo-driver v1.17.9
 	google.golang.org/grpc v1.79.3
