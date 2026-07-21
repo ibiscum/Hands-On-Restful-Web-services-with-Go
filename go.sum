@@ -398,8 +398,8 @@ github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78/go.mod h1:aL8wCCfTfS
 github.com/yuin/goldmark v1.1.27/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9decYSb74=
 github.com/yuin/goldmark v1.4.13/go.mod h1:6yULJ656Px+3vBD8DxQVa3kxgyrAnzto9xy5taEt/CY=
-go-micro.dev/v5 v5.20.0 h1:0CM7q0caaJsI6CwdTPcSe2mv/Zw8DoGAFEen3g8o+KU=
-go-micro.dev/v5 v5.20.0/go.mod h1:tMmaDJJppdtj9oO4ucry1TpY4IiDiaHDie/3ke5DC6E=
+go-micro.dev/v5 v5.30.0 h1:OHvY8LV39Pk/pWUhxihCa26q25SpDDnfwU3n6z9R2Vs=
+go-micro.dev/v5 v5.30.0/go.mod h1:eWTF7KQRYXmjm9s5p4Pzrk5CObHQKlh6B/u573gd/Qo=
 go.etcd.io/bbolt v1.4.0 h1:TU77id3TnN/zKr7CO/uk+fBCwF2jGcMuw2B/FMAzYIk=
 go.etcd.io/bbolt v1.4.0/go.mod h1:AsD+OCi/qPN1giOX1aiLAha3o1U8rAz65bvN4j0sRuk=
 go.etcd.io/etcd/api/v3 v3.5.21 h1:A6O2/JDb3tvHhiIz3xf9nJ7REHvtEFJJ3veW3FbCnS8=

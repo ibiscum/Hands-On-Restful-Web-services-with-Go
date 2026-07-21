@@ -136,7 +136,7 @@ require (
 	github.com/spf13/cobra v1.10.2
 	github.com/streadway/amqp v1.1.0
 	github.com/urfave/cli v1.22.17
-	go-micro.dev/v5 v5.20.0
+	go-micro.dev/v5 v5.30.0
 	go.mongodb.org/mongo-driver v1.17.9
 	google.golang.org/grpc v1.79.3
 	gopkg.in/mgo.v2 v2.0.0-20190816093944-a6b53ec6cb22
