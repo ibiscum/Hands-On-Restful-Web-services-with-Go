@@ -131,7 +131,7 @@ require (
 	github.com/levigross/grequests v0.0.0-20231203190023-9c307ef1f48d
 	github.com/lib/pq v1.12.3
 	github.com/machinebox/graphql v0.2.2
-	github.com/mattn/go-sqlite3 v1.14.44
+	github.com/mattn/go-sqlite3 v1.14.47
 	github.com/revel/revel v1.1.0
 	github.com/spf13/cobra v1.10.2
 	github.com/streadway/amqp v1.1.0
